@@ -67,8 +67,8 @@ static gboolean capture(GtkWidget *widget, GdkEvent *event, gpointer user_data)
 
 int main(int argc, char **argv)
 {
-	if (argc != 4) {
-		printf("Usage: %s <width> <height> <url>\n", argv[0]);
+	if (argc != 5) {
+		printf("Usage: %s <width> <height> <url> <css>\n", argv[0]);
 		return 0;
 	}
 
@@ -80,7 +80,7 @@ int main(int argc, char **argv)
 
 	GtkCssProvider *css = gtk_css_provider_new();
 	gtk_css_provider_load_from_data(
-		css, "* { background-color: transparent; }", -1, NULL);
+		css, argv[4], -1, NULL);
 	gtk_style_context_add_provider(gtk_widget_get_style_context(window),
 				       GTK_STYLE_PROVIDER(css),
 				       GTK_STYLE_PROVIDER_PRIORITY_USER);

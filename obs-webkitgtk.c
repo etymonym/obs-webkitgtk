@@ -142,6 +142,7 @@ static void start(data_t *data)
 
 	char *helper[] = {app, width, height,
 			  (char *)obs_data_get_string(data->settings, "url"),
+			  (char *)obs_data_get_string(data->settings, "css"),
 			  NULL};
 
 	gboolean res = g_spawn_async_with_pipes(NULL, helper, NULL,
@@ -214,6 +215,8 @@ static void get_defaults(obs_data_t *settings)
 {
 	obs_data_set_default_string(settings, "url",
 				    "https://obsproject.com/browser-source");
+	obs_data_set_default_string(settings, "css",
+				    "* { background-color: transparent; }");
 	obs_data_set_default_int(settings, "width", 800);
 	obs_data_set_default_int(settings, "height", 600);
 	obs_data_set_default_bool(settings, "keep_running", true);
@@ -226,6 +229,7 @@ static obs_properties_t *get_properties(void *p)
 	obs_properties_t *props = obs_properties_create();
 
 	obs_properties_add_text(props, "url", "URL", OBS_TEXT_DEFAULT);
+	obs_properties_add_text(props, "css", "CSS", OBS_TEXT_DEFAULT);
 	obs_properties_add_int(props, "width", "Width", 0, 4096, 1);
 	obs_properties_add_int(props, "height", "Height", 0, 4096, 1);
 	obs_properties_add_bool(props, "keep_running",
